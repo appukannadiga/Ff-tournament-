@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Fire Tournament Registration</title>
+</head>
+<body>
+  <h1>Register for Free Fire Tournament</h1>
+  <form id="regForm">
+    <input type="text" id="teamName" placeholder="Team Name" required><br>
+    <input type="text" id="leaderName" placeholder="Leader Name" required><br>
+    <input type="text" id="phone" placeholder="Phone Number" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="player1" placeholder="Player 1 UID" required><br>
+    <input type="text" id="player2" placeholder="Player 2 UID"><br>
+    <input type="text" id="player3" placeholder="Player 3 UID"><br>
+    <input type="text" id="player4" placeholder="Player 4 UID"><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    document.getElementById('regForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const data = {
+        teamName: document.getElementById('teamName').value,
+        leaderName: document.getElementById('leaderName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        player1: document.getElementById('player1').value,
+        player2: document.getElementById('player2').value,
+        player3: document.getElementById('player3').value,
+        player4: document.getElementById('player4').value
+      };
+
+      const res = await fetch('/.netlify/functions/register', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const result = await res.text();
+      alert(result);
+    });
+  </script>
+</body>
+</html>
